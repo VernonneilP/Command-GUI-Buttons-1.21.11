@@ -8,7 +8,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 //#if MC >= 12109
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Identifier;
 //#endif
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
@@ -31,7 +31,7 @@ public class CommandButtons implements ModInitializer {
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_G,
                 //#if MC >= 12109
-                KeyMapping.Category.register(ResourceLocation.fromNamespaceAndPath("mgbuttons", "category"))
+                KeyMapping.Category.register(Identifier.fromNamespaceAndPath("mgbuttons", "category"))
                 //#else
                 //$$ "key.category.mgbuttons.category"
                 //#endif
