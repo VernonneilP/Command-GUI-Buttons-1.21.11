@@ -8,7 +8,7 @@ preprocess {
 
     def mc12111 = createNode("1.21.11", 1_21_11, "mojang")
 
-    mc12110.link(mc12111, null)
+    mc12111.link(mc12111, null)
 }
 
 def ENV = System.getenv()
