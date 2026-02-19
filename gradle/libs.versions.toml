@@ -1,6 +1,6 @@
 [versions]
 # Gradle Plugins
-fabric-loom = "1.12-SNAPSHOT"
+fabric-loom = "1.13.3"
 preprocessor = "d452ef7"
 grgit = "5.3.3"
 yamlang = "1.5.0"
