@@ -31,7 +31,8 @@ public class CommandButtons implements ModInitializer {
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_G,
                 //#if MC >= 12109
-                KeyMapping.Category.register(Identifier.fromNamespaceAndPath("mgbuttons", "category"))
+                // Use Identifier.of instead of fromNamespaceAndPath
+                KeyMapping.Category.register(Identifier.of("mgbuttons", "category"))
                 //#else
                 //$$ "key.category.mgbuttons.category"
                 //#endif
