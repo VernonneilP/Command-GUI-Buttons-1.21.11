@@ -27,8 +27,10 @@ java {
 jar {
     // Disable cache
     outputs.upToDateWhen { false }
-    dependsOn(fabric_subprojects.collect {
-        it.tasks.remapJar
+    
+    // Use a lazy collection to prevent "unknown property remapJar" errors
+    dependsOn(fabric_subprojects.collect { 
+        it.tasks.matching { task -> task.name == "remapJar" } 
     })
 
     from(project.rootProject.file("LICENSE"))
@@ -38,8 +40,10 @@ jar {
         delete fileTree(layout.buildDirectory.dir("tmp/submods/META-INF/jars"))
         copy {
             from {
-                fabric_subprojects.collect {
-                    it.remapJar.outputs.files
+                fabric_subprojects.collect { sub ->
+                    // Use findByName to safely check for the task
+                    def remapTask = sub.tasks.findByName("remapJar")
+                    return remapTask ? remapTask.outputs.files : []
                 }
             }
             into(layout.buildDirectory.dir("tmp/submods/META-INF/jars"))
@@ -69,8 +73,8 @@ processResources {
     }
 
     doLast {
-        ArrayList<?> mc_condition = []
-        ArrayList<?> jars = []
+        ArrayList<String> mc_condition = []
+        ArrayList<Map<String, String>> jars = []
 
         fabric_subprojects.each({
             mc_condition.add("${it.minecraft_dependency}")
